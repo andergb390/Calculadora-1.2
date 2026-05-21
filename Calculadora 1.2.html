@@ -1,0 +1,86 @@
+<html>
+<head>
+  <title>calculadora de Area Quadrada</title>
+</head>
+<body>
+   <input id="num1" type="number" placeholder="digite o numero que desejar">
+   <input id="num2" type="number" placeholder="porcentagem desejada">
+
+   <button onclick="AreaQuadrada()">AreaQuadrada</button>
+   <button onclick="testarAreaQuadrada()">TestarAreaQuadrada</button>
+   <button onclick="CalcularPorcentagem()">Porcentagem</button>
+   <button onclick="testarCalcularPorcentagem()">TestarPorcentagem</button>
+   <div id="resultado"></div>
+   <script>
+    function obterNumeros() {
+      const n1 = Number(document.getElementById("num1").value);
+      if (!n1 || n1 <= 0) {
+        alert("Coloque um numero valido ou maior que zero");
+        return null;
+      }
+      const n2 = Number(document.getElementById("num2").value);
+      if (!n2 || n2 <= 0) {
+        alert("Coloque uma porcentagem valida ou maior que zero");
+        return null;
+      }
+      return { n1, n2 };
+    }
+
+    function AreaQuadrada() {
+      const valores = obterNumeros();
+      if (valores) {
+        const area = valores.n1 * valores.n1;
+
+        document.getElementById("resultado").setAttribute("valor-calculado", area);
+        document.getElementById("resultado").innerHTML = 
+          "Resultado: " + valores.n1 + "² = " + area + "m²";
+      }
+    }
+
+    function testarAreaQuadrada() {
+
+      document.getElementById("num1").value = 2;
+
+      AreaQuadrada();
+
+      const resultadoEsperado = 4;
+   
+      const resultadoAtual = Number(document.getElementById("resultado").getAttribute("valor-calculado"));
+
+      if (resultadoAtual == resultadoEsperado) {
+        document.getElementById("resultado").innerHTML += "<br> Apos um bom tempo testando e fazendo o codigo de AreaQuadrada, esta funcionando!.";
+      } else {
+        document.getElementById("resultado").innerHTML += "<br> O codigo de AreaQuadrada nao esta funcionando corretamente, reportenos que iremos corrigir.";
+      }
+    }
+    function CalcularPorcentagem() {
+      const valores = obterNumeros();
+      if (valores) {
+        const porcentagem = (valores.n1 * valores.n2) / 100;
+
+        document.getElementById("resultado").setAttribute("valor-calculado", porcentagem);
+        document.getElementById("resultado").innerHTML = 
+          "Resultado: " + valores.n1 + " * " + valores.n2 + "% = " + porcentagem;
+      }
+    }
+    function testarCalcularPorcentagem() {
+
+      document.getElementById("num1").value = 100;
+      document.getElementById("num2").value = 10;
+
+      CalcularPorcentagem();
+
+      const resultadoEsperado = 10;
+   
+      const resultadoAtual = Number(document.getElementById("resultado").getAttribute("valor-calculado"));
+
+      if (resultadoAtual == resultadoEsperado) {
+        document.getElementById("resultado").innerHTML += "<br> Apos um bom tempo testando e fazendo o codigo de CalcularPorcentagem, esta funcionando!.";
+      } else {
+        document.getElementById("resultado").innerHTML += "<br> O codigo de CalcularPorcentagem nao esta funcionando corretamente, reportenos que iremos corrigir.";
+      }
+    }
+
+</script>
+</body>
+</html>
