@@ -1,0 +1,209 @@
+<html>
+<head>
+  <title>Calculadora de Área e Juros</title>
+</head>
+<body>
+
+  <h3>Calculadora de Área (Base x Altura)</h3>
+
+  Base: <input id="num1" type="number" placeholder="Digite a base">
+  <br><br>
+  Altura: <input id="num2" type="number" placeholder="Digite a altura">
+  <br><br>
+
+  <button onclick="CalcularArea()">Calcular Área</button>
+
+  <br><br>
+  <button onclick="testarInput()">Testar Input</button>
+  <button onclick="testarCalculo()">Testar Calculo</button>
+  <button onclick="testarDivResultado()">Testar Div Resultado</button>
+  <button onclick="testarSegundoInput()">Testar Segundo Input</button>
+  <button onclick="testarNumeroInvalido()">Testar Numero Invalido</button>
+
+  <br><br>
+  <div id="resultado"></div>
+
+  <script>
+    function CalcularArea() {
+      let n1 = Number(document.getElementById("num1").value);
+      let n2 = Number(document.getElementById("num2").value);
+
+      if (n1 <= 0 || n2 <= 0) {
+        document.getElementById("resultado").innerHTML = "Coloque um numero valido ou maior que zero <br>";
+        return;
+      }
+
+      let resultado = n1 * n2;
+      document.getElementById("resultado").setAttribute("valor-calculado", resultado);
+      document.getElementById("resultado").innerHTML = "Resultado: " + n1 + " × " + n2 + " = " + resultado + "m² <br>";
+    }
+
+    function testarInput() {
+      document.getElementById("resultado").innerHTML = "";
+      document.getElementById("num1").value = 4;
+      let valorInput = Number(document.getElementById("num1").value);
+      
+      if (valorInput === 4) {
+        document.getElementById("resultado").innerHTML += "Teste Input: Apos um bom tempo testando, o campo esta pegando valor corretamente!.<br>";
+      } else {
+        document.getElementById("resultado").innerHTML += "Teste Input: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarCalculo() {
+      document.getElementById("resultado").innerHTML = "";
+      document.getElementById("num1").value = 3;
+      document.getElementById("num2").value = 5;
+      CalcularArea();
+      let resultadoCalc = Number(document.getElementById("resultado").getAttribute("valor-calculado"));
+      
+      if (resultadoCalc === 15) {
+        document.getElementById("resultado").innerHTML += "Teste Calculo: Apos um bom tempo testando, a conta da area esta correta!.<br>";
+      } else {
+        document.getElementById("resultado").innerHTML += "Teste Calculo: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarDivResultado() {
+      document.getElementById("resultado").innerHTML = "";
+      document.getElementById("num1").value = 2;
+      document.getElementById("num2").value = 10;
+      CalcularArea();
+      let textoDiv = document.getElementById("resultado").innerHTML;
+      
+      if (textoDiv.includes("Resultado:")) {
+        document.getElementById("resultado").innerHTML += "Teste Div Resultado: Apos um bom tempo testando, a caixa de resultado esta aparecendo o texto direitinho!.<br>";
+      } else {
+        document.getElementById("resultado").innerHTML += "Teste Div Resultado: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarSegundoInput() {
+      document.getElementById("resultado").innerHTML = "";
+      document.getElementById("num2").value = 6;
+      document.getElementById("num1").value = 4;
+      CalcularArea();
+      let resultadoComNum2 = Number(document.getElementById("resultado").getAttribute("valor-calculado"));
+      
+      if (resultadoComNum2 === 24) {
+        document.getElementById("resultado").innerHTML += "Teste Segundo Input: Apos um bom tempo testando, funciona normalmente usando o outro campo!.<br>";
+      } else {
+        document.getElementById("resultado").innerHTML += "Teste Segundo Input: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarNumeroInvalido() {
+      document.getElementById("resultado").innerHTML = "";
+      document.getElementById("num1").value = -2;
+      let valorInvalido = Number(document.getElementById("num1").value);
+      
+      if (valorInvalido <= 0) {
+        document.getElementById("resultado").innerHTML += "Teste Numero Invalido: Apos um bom tempo testando, o sistema bloqueou numero negativo corretamente!.<br>";
+      } else {
+        document.getElementById("resultado").innerHTML += "Teste Numero Invalido: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+  </script>
+
+  <br><hr><br>
+  <h3>Calculadora de Juros Simples</h3>
+
+  Valor da Conta: <input id="valorConta" type="number" placeholder="Digite o valor">
+  <br><br>
+  Juros (%): <input id="valorJuros" type="number" placeholder="Digite a porcentagem">
+  <br><br>
+
+  <button onclick="CalcularJuros()">Calcular Juros</button>
+
+  <br><br>
+  <button onclick="testarInputConta()">Testar Input Conta</button>
+  <button onclick="testarInputJuros()">Testar Input Juros</button>
+  <button onclick="testarCalculoJuros()">Testar Calculo Juros</button>
+  <button onclick="testarDivResultadoJuros()">Testar Div Resultado</button>
+  <button onclick="testarValorInvalidoJuros()">Testar Valor Invalido</button>
+
+  <br><br>
+  <div id="resultadoJuros"></div>
+
+  <script>
+    function CalcularJuros() {
+      let conta = Number(document.getElementById("valorConta").value);
+      let juros = Number(document.getElementById("valorJuros").value);
+
+      if (conta <= 0 || juros < 0) {
+        document.getElementById("resultadoJuros").innerHTML = "Coloque valores validos (maiores ou iguais a zero) <br>";
+        return;
+      }
+
+      let valorFinal = conta + (conta * juros / 100);
+      document.getElementById("resultadoJuros").setAttribute("valor-teste-juros", valorFinal);
+      document.getElementById("resultadoJuros").innerHTML = "Valor Final: R$ " + valorFinal + " <br>";
+    }
+
+    function testarInputConta() {
+      document.getElementById("resultadoJuros").innerHTML = "";
+      document.getElementById("valorConta").value = 1000;
+      let valor = Number(document.getElementById("valorConta").value);
+      
+      if (valor === 1000) {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Input Conta: Apos um bom tempo testando, o campo esta pegando valor corretamente!.<br>";
+      } else {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Input Conta: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarInputJuros() {
+      document.getElementById("resultadoJuros").innerHTML = "";
+      document.getElementById("valorJuros").value = 10;
+      let valor = Number(document.getElementById("valorJuros").value);
+      
+      if (valor === 10) {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Input Juros: Apos um bom tempo testando, o campo esta pegando valor corretamente!.<br>";
+      } else {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Input Juros: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarCalculoJuros() {
+      document.getElementById("resultadoJuros").innerHTML = "";
+      document.getElementById("valorConta").value = 1000;
+      document.getElementById("valorJuros").value = 10;
+      CalcularJuros();
+      let resultado = Number(document.getElementById("resultadoJuros").getAttribute("valor-teste-juros"));
+      
+      if (resultado === 1100) {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Calculo Juros: Apos um bom tempo testando, a conta esta correta!.<br>";
+      } else {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Calculo Juros: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarDivResultadoJuros() {
+      document.getElementById("resultadoJuros").innerHTML = "";
+      document.getElementById("valorConta").value = 500;
+      document.getElementById("valorJuros").value = 5;
+      CalcularJuros();
+      let texto = document.getElementById("resultadoJuros").innerHTML;
+      
+      if (texto.includes("Valor Final:")) {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Div Resultado: Apos um bom tempo testando, a caixa esta aparecendo o texto direitinho!.<br>";
+      } else {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Div Resultado: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+    function testarValorInvalidoJuros() {
+      document.getElementById("resultadoJuros").innerHTML = "";
+      document.getElementById("valorConta").value = -100;
+      let valor = Number(document.getElementById("valorConta").value);
+      
+      if (valor <= 0) {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Valor Invalido: Apos um bom tempo testando, o sistema bloqueou valor errado corretamente!.<br>";
+      } else {
+        document.getElementById("resultadoJuros").innerHTML += "Teste Valor Invalido: O codigo nao esta funcionando corretamente, reportenos que iremos corrigir.<br>";
+      }
+    }
+
+  </script>
+</body>
+</html>
